@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="cs">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Autodoprava Deniska — Profesionální přeprava osob a transfery</title>
+		<meta name="description" content="Autodoprava Deniska — transfery na letiště, svatby, oslavy, pronájem vozidel s řidičem. Profesionální a diskrétní doprava.">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+		<style>
+					:root{
+						--accent:#0b6efd;
+						--accent-2: #07c1a3;
+						--dark:#0f1724;
+						--muted:#6b7280;
+						--card:#ffffff;
+						--glass: rgba(255,255,255,0.06);
+						--max-width:1100px;
+						--radius:10px;
+						--shadow: 0 6px 20px rgba(16,24,40,0.08);
+						--transition: 300ms cubic-bezier(.2,.8,.2,1);
+					--header-height:92px; /* increased so nav + gap create visible space under header */
+				--hero-scale:0.1666667; /* ~16.67% of full viewport area (reduced further) */
+					}
+			*{box-sizing:border-box}
+			html,body{height:100%}
+					body{
+						margin:0;
+						font-family: 'Inter', Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+						color:var(--dark);
+						background: linear-gradient(180deg,#fbfdff 0%, #ffffff 100%);
+						-webkit-font-smoothing:antialiased;
+						-moz-osx-font-smoothing:grayscale;
+						scroll-behavior:smooth;
+					}
+					header{
+						position:fixed;top:0;left:0;right:0;z-index:9999;
+						height:var(--header-height); /* výška hlavičky vytažená z proměnné */
+						display:flex;align-items:center;
+						backdrop-filter: blur(8px);
+						background:linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,255,255,0.8));
+						border-bottom:1px solid rgba(15,23,36,0.04);
+					}
+				/* Navigační lišta: používá 100% výšky hlavičky, horizontální padding pouze */
+				.nav{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:100%;padding:0 20px}
+			.brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--dark);font-size:18px;letter-spacing:0.2px}
+			.brand .dot{width:14px;height:14px;border-radius:4px;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 8px 28px rgba(11,110,237,0.12)}
+			nav ul{list-style:none;margin:0;padding:0;display:flex;gap:20px;align-items:center}
+			nav a{color:var(--dark);text-decoration:none;font-weight:600;padding:8px 10px;border-radius:8px;transition:var(--transition)}
+			nav a:hover{background:var(--glass)}
+			.cta{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 16px;border-radius:12px;font-weight:700;box-shadow:0 8px 24px rgba(11,110,237,0.12);transition:transform .18s ease, box-shadow .18s ease}
+			.cta:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(11,110,237,0.16)}
+
+				/* Hlavní obsah: rezervujeme prostor pro pevnou hlavičku a přidáme mezeru pod ní */
+				main{max-width:var(--max-width);padding-top:calc(var(--header-height) + 1.2cm);margin:0 auto 80px;padding-left:20px;padding-right:20px}
+			.hero{display:flex;gap:40px;align-items:stretch;height:calc((100vh - var(--header-height)) * var(--hero-scale));}
+				/* Desktop: levý sloupec textu 33,33 %, pravý (slideshow) 66,66 % */
+				/*
+				/* POZNÁMKA (výška od horní části stránky):
+				  - Kde začíná text v levém sloupci (vrchní okraj .hero .left):
+				    = vnitřní odsazení hlavního kontejneru `main` (padding-top)
+				    = calc(var(--header-height) + 1.2cm)
+				  - Aktuální hodnoty v kódu: --header-height = 92px
+				    1.2cm ≈ 45px (přibližně, závisí na DPI prohlížeče)
+				    => přibližně 92px + 45px ≈ 137px od horního okraje stránky
+				  - Pozn: pokud je přidán margin-top na `.hero` nebo `.slider-wrap`, výsledná viditelná pozice se posune.
+				*/
+				/* Uživatelský požadavek: posunout text v levém sloupci o 500px od horní části stránky.
+				   Na menších obrazovkách (tablety/mobily) je velké odsazení nežádoucí,
+				   proto je v media query přepsáno na přijatelnou hodnotu (24px). */
+				/* Levý sloupec nyní má pevnou šířku v pixelech pro snadnou úpravu */
+				.hero .left{width:480px;min-width:320px;display:flex;flex-direction:column;justify-content:center;margin-top:210px !important}
+			.hero .right{flex:0 0 66.6666%;display:flex;align-items:center;justify-content:center}
+					/* Obrázkový slider: zajistit dostatečnou výšku a mezeru pod ním */
+					/* Obrázkový slider: malá čtvercová preview v hero (aspect-ratio 1:1) */
+					.slider-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:48px}
+					/* Uživatelská požadavek: posunout pouze slideshow dolů pod navigaci */
+					.slider-wrap{margin-top:500px !important}
+					.slider{max-width:420px;width:100%;aspect-ratio:1/1;border-radius:12px;overflow:hidden}
+					.slides{height:100%}
+					.slide{height:100%}
+					.slide img{height:100%;object-fit:cover}
+				/* Zarovnání teček pod slideshow */
+			.slider-wrap .dots{justify-content:center;width:auto}
+			.hero h1{font-size:40px;margin:0 0 14px;color:var(--dark);line-height:1.05}
+			.hero h1 strong{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+			.hero p{margin:0 0 18px;color:var(--muted);line-height:1.6}
+			.buttons{display:flex;gap:12px}
+
+			.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+			.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px}
+			.service{padding:14px;border-radius:12px;border:1px solid rgba(15,23,36,0.04)}
+			.service h4{margin:0 0 6px}
+
+			/* Pricing */
+			.pricing{margin-top:34px;display:grid;grid-template-columns:1fr;gap:18px}
+			.price-table{display:flex;flex-direction:column;gap:12px}
+			.price-row{display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:10px;border:1px solid rgba(15,23,36,0.04)}
+			.muted{color:var(--muted);font-size:14px}
+
+			/* Slider */
+			.slider{position:relative;overflow:hidden;border-radius:14px;margin-top:18px}
+			.slides{display:flex;transition:transform 900ms cubic-bezier(.2,.8,.2,1)}
+			.slide{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center;filter:contrast(0.98) saturate(1.02)}
+			.slide img{width:100%;height:100%;object-fit:cover;border-radius:12px;display:block}
+			.slider .controls{position:absolute;left:16px;right:16px;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between;pointer-events:none}
+			.btn{pointer-events:auto;background:rgba(11,110,237,0.9);color:#fff;border:none;padding:8px 12px;border-radius:10px;opacity:0.95}
+			.btn:hover{opacity:1}
+			.dots{display:flex;gap:8px;justify-content:center;padding:12px;margin-top:10px}
+			.dot-btn{width:10px;height:10px;border-radius:50%;background:rgba(15,23,36,0.12);border:none}
+			.dot-btn.active{background:var(--accent)}
+
+				/* Sekce: výrazné a konzistentní mezery */
+				section{padding-block:64px}
+				/* Posunout sekci 'Naše služby' a následující obsah o 100px dolů */
+				#sluzby{margin-top:-200px}
+				/* Zajistit jasné oddělení hero od následujících sekcí */
+				.hero{margin-bottom:640px}
+				/* Mřížka galerie */
+			.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-top:12px}
+			.gallery-grid img{width:100%;height:110px;object-fit:cover;border-radius:10px;transition:transform .25s ease;display:block}
+			.gallery-grid img:hover{transform:scale(1.03)}
+
+			footer{max-width:var(--max-width);margin:40px auto 60px;padding:0 20px;color:var(--muted);font-size:14px}
+
+									@media (max-width:1100px){
+												/* Na menších obrazovkách slider zabírá celou šířku */
+												.hero{flex-direction:column;height:auto}
+											.hero .left,.hero .right{flex:unset;width:100%}
+											/* Přepsat velké margin-top na mobilu */
+											.hero .left{margin-top:24px !important; width:100%}
+											/* Posun sekce #sluzby menší zařízení */
+											#sluzby{margin-top:48px}
+												.slider{max-width:100%;aspect-ratio: auto}
+											}
+					@media (max-width:720px){
+						.slide{height:220px}
+					}
+					/* Styly pro wide-carousel v sekci Vozový park */
+					/* Karusel má nyní stejnou šířku jako hlavní obsah (centrovaný kontejner) */
+					/* Karusel zarovnaný přesně s hlavním obsahem: padding 20px jako v <main> */
+					.wide-carousel{position:relative;width:100%;max-width:var(--max-width);margin:18px auto;padding:0 20px;box-sizing:border-box;overflow:visible}
+					/* mezera mezi popiskem a slideshow v sekci Vozový park */
+					#vozovy-park > p{margin-bottom:50px}
+					/* track má nulové mezery mezi položkami, výška zvýšena o 100px */
+					.wc-track{position:relative;height:300px;display:flex;align-items:center;justify-content:center;gap:0;padding:0}
+					/* Nastavíme flexibilní základy položek relativně k šířce kontejneru.
+					   Hlavní (active) zabere 50% šířky obsahu, vedlejší 25% každá. */
+					.wc-item{position:relative;flex:0 0 auto;height:300px;transition:width .9s cubic-bezier(.22,.9,.26,1),transform .9s cubic-bezier(.22,.9,.26,1),opacity .9s ease;transform-origin:center center;margin:0}
+					.wc-item img{width:100%;height:100%;object-fit:cover;border-radius:10px;display:block;box-shadow:0 6px 30px rgba(2,6,23,0.25);transition:transform .9s cubic-bezier(.22,.9,.26,1),opacity .9s ease,filter .9s ease;will-change:transform,opacity,filter}
+					/* Upravíme img tak, aby hlavní mohl překrývat sousedy (odstraňujeme vnitřní mezery) */
+					.wc-item img{display:block}
+					.wc-item.active img{border-radius:12px;box-shadow:0 18px 60px rgba(2,6,23,0.35);filter:none}
+					.wc-item.prev1 img, .wc-item.next1 img{border-radius:8px;box-shadow:0 8px 30px rgba(2,6,23,0.18);filter:grayscale(.25) contrast(.9)}
+					/* Základní vrstvy pro viditelné pozice */
+					/* Pro overlap budeme pracovat s procenty šířky kontejneru. Pozice jsou vypočteny v JS, zde pouze základní styly. */
+					/* viditelnost a vzhled vrstev: prvni soused 50%, druhy 30% */
+					.wc-item.prev2{opacity:.3;z-index:2}
+					.wc-item.prev1{opacity:.5;z-index:3}
+					.wc-item.active{z-index:6}
+					.wc-item.next1{opacity:.5;z-index:3}
+					.wc-item.next2{opacity:.3;z-index:2}
+					/* ostatní položky jsou posunuté mimo zobrazení */
+					.wc-item{opacity:0;z-index:1;pointer-events:none}
+					.wc-item.active, .wc-item.prev1, .wc-item.prev2, .wc-item.next1, .wc-item.next2{opacity:1;pointer-events:auto}
+					.wc-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.9);border:0;padding:10px;border-radius:8px;cursor:pointer;box-shadow:0 8px 24px rgba(2,6,23,0.12)}
+					.wc-btn.prev{left:8px}
+					.wc-btn.next{right:8px}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="nav">
+				<div class="brand"><span class="dot"></span>Autodoprava Deniska</div>
+				<nav>
+					<ul>
+						<li><a href="#sluzby">Služby</a></li>
+						<li><a href="#cenik">Ceník</a></li>
+						<li><a href="#vozovy-park">Vozový park</a></li>
+						<li><a href="#fotogalerie">Fotogalerie</a></li>
+						<li><a href="#kontakt">Kontakt</a></li>
+						<li><a class="cta" href="#kontakt">Rezervace</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<main>
+			<section class="hero">
+				<div class="left">
+					<h1>Autodoprava Deniska — profesionální přeprava osob a transfery</h1>
+					<p>Diskrétní a spolehlivé služby přepravy: transfery na letiště, osobní přepravy mezi městy, pronájem vozidla s řidičem pro svatby a oslavy nebo přeprava menšího nákladu. Moderní vozový park a zkušený řidič — komfort, bezpečí a přesnost.</p>
+					<div class="buttons">
+										<a class="cta" href="#kontakt">Objednat transfer</a>
+										<a class="cta" href="#cenik">Zobrazit ceník</a>
+					</div>
+					<div class="card">
+						<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+							<div>
+								<div style="font-weight:700">Rychlá hotline</div>
+								<div class="muted">Tel: +420 123 456 789 • email: info@deniska.cz</div>
+							</div>
+							<div class="muted">IČO: 09235787 • DIČ: CZ7409214065</div>
+						</div>
+					</div>
+				</div>
+				<div class="right" style="flex:1">
+										<div class="slider-wrap">
+											<div class="slider card" aria-label="Slideshow vozového parku">
+												<div class="slides" id="slides">
+							<!-- 10 slide images from assets -->
+							<div class="slide" role="img" aria-label="Vozidlo 1"><img src="assets/IMG_3125.JPEG" alt="Vůz 1" loading="eager"></div>
+							<div class="slide" role="img" aria-label="Vozidlo 2"><img src="assets/IMG_3126.JPEG" alt="Vůz 2" loading="lazy"></div>
+							<div class="slide" role="img" aria-label="Vozidlo 3"><img src="assets/IMG_3127.JPEG" alt="Vůz 3" loading="lazy"></div>
+							<div class="slide" role="img" aria-label="Vozidlo 4"><img src="assets/IMG_3128.JPEG" alt="Vůz 4" loading="lazy"></div>
+							<div class="slide" role="img" aria-label="Vozidlo 5"><img src="assets/IMG_3129.JPEG" alt="Vůz 5" loading="lazy"></div>
+							<div class="slide" role="img" aria-label="Vozidlo 6"><img src="assets/IMG_3130.JPEG" alt="Vůz 6" loading="lazy"></div>
+							<div class="slide" role="img" aria-label="Vozidlo 7"><img src="assets/IMG_3131.JPEG" alt="Vůz 7" loading="lazy"></div>
+							<div class="slide" role="img" aria-label="Vozidlo 8"><img src="assets/IMG_3132.JPEG" alt="Vůz 8" loading="lazy"></div>
+							<div class="slide" role="img" aria-label="Vozidlo 9"><img src="assets/IMG_3133.JPEG" alt="Vůz 9" loading="lazy"></div>
+							<div class="slide" role="img" aria-label="Vozidlo 10"><img src="assets/IMG_3134.JPEG" alt="Vůz 10" loading="lazy"></div>
+						</div>
+						<div class="controls">
+							<button class="btn" id="prev" aria-label="Předchozí">❮</button>
+							<button class="btn" id="next" aria-label="Další">❯</button>
+													</div>
+												</div>
+												<div class="dots" id="dots" aria-hidden="false"></div>
+											</div>
+				</div>
+			</section>
+
+			<section id="sluzby">
+				<h2>Naše služby</h2>
+				<p class="muted">Komplexní nabídka přepravy přizpůsobená vašim požadavkům — od jednoduchých transferů po dlouhodobé pronájmy s řidičem.</p>
+				<div class="services">
+					<div class="service card">
+						<h4>Transfery mezi městy</h4>
+						<p class="muted">Přímé spoje bez přestupů: pohodlí, bezpečí a přesný odhad času příjezdu.</p>
+					</div>
+					<div class="service card">
+						<h4>Transfery na letiště</h4>
+						<p class="muted">Načasování dle vašeho letu, pomoc s zavazadly a profesionální chování řidiče.</p>
+					</div>
+					<div class="service card">
+						<h4>Svatební a společenské události</h4>
+						<p class="muted">Elegantní vozy s řidičem pro svatby, oslavy a VIP dopravu.</p>
+					</div>
+					<div class="service card">
+						<h4>Malý náklad</h4>
+						<p class="muted">Možnost převozu menšího nákladu v rámci služeb – bezpečně a diskrétně.</p>
+					</div>
+				</div>
+			</section>
+
+			<section id="cenik">
+				<h2>Ceník (orientační)</h2>
+				<p class="muted">Níže uvedené ceny jsou reprezentativním příkladem. Ceny jsou smluvní a mohou se lišit podle konkrétní objednávky. Všechny ceny jsou uvedeny bez DPH.</p>
+
+				<div class="pricing">
+					<div class="card price-table">
+						<strong>Osobní vůz: Škoda Kodiaq (max 4 osoby)</strong>
+						<div class="price-row"><div>Brno – Bratislava</div><div><strong>3 600 Kč</strong></div></div>
+						<div class="price-row"><div>Brno – Vídeň</div><div><strong>3 600 Kč</strong></div></div>
+						<div class="price-row"><div>Brno – Praha</div><div><strong>4 500 Kč</strong></div></div>
+					</div>
+
+					<div class="card price-table">
+						<strong>Minivan: Mercedes třídy V (max 6 osob)</strong>
+						<div class="price-row"><div>Brno – Bratislava</div><div><strong>4 500 Kč</strong></div></div>
+						<div class="price-row"><div>Brno – Vídeň</div><div><strong>4 500 Kč</strong></div></div>
+						<div class="price-row"><div>Brno – Praha</div><div><strong>5 850 Kč</strong></div></div>
+					</div>
+
+					<div class="card price-table">
+						<strong>Pronájem vozidla s řidičem (svatby, oslavy)</strong>
+						<div class="price-row"><div>Základní sazba</div><div><strong>3 000 Kč / hod</strong></div></div>
+						<div class="price-row"><div>V ceně zahrnuto</div><div class="muted">paušál 50 km za každou započatou hodinu</div></div>
+						<div class="price-row"><div>Čekání</div><div><strong>400 Kč / hod</strong></div></div>
+						<div class="price-row"><div>Každá další započatá hodina</div><div><strong>1 500 Kč</strong></div></div>
+						<div class="muted">Ceny zahrnují poplatky za parkování a případné vjezdy na letiště.</div>
+					</div>
+
+					<div class="card price-table">
+						<strong>Pronájem autobusu s řidičem</strong>
+						<div class="muted">Ceny individuální, stanovujeme dle trasy a požadavků zákazníka. Kontaktujte nás pro nabídku.</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="vozovy-park">
+				<h2>Vozový park</h2>
+				<p class="muted">Pečlivě udržované vozy od standardních osobních až po minivany pro skupiny. Všechny vozy jsou pojištěné a pravidelně kontrolované.</p>
+				<!-- Nová široká slideshow přes celou šířku, výška 200px. Zobrazuje aktuální velkou fotku + 2 vlevo a 2 vpravo s 3D efektem -->
+				<div class="wide-carousel" aria-label="Vozový park - carousel">
+					<div class="wc-track" id="wc-track">
+						<!-- obrázky budou vloženy sem skriptem nebo staticky -->
+						<div class="wc-item"><img src="assets/IMG_3125.JPEG" alt="Vůz 1"></div>
+						<div class="wc-item"><img src="assets/IMG_3126.JPEG" alt="Vůz 2"></div>
+						<div class="wc-item"><img src="assets/IMG_3127.JPEG" alt="Vůz 3"></div>
+						<div class="wc-item"><img src="assets/IMG_3128.JPEG" alt="Vůz 4"></div>
+						<div class="wc-item"><img src="assets/IMG_3129.JPEG" alt="Vůz 5"></div>
+						<div class="wc-item"><img src="assets/IMG_3130.JPEG" alt="Vůz 6"></div>
+						<div class="wc-item"><img src="assets/IMG_3131.JPEG" alt="Vůz 7"></div>
+						<div class="wc-item"><img src="assets/IMG_3132.JPEG" alt="Vůz 8"></div>
+						<div class="wc-item"><img src="assets/IMG_3133.JPEG" alt="Vůz 9"></div>
+						<div class="wc-item"><img src="assets/IMG_3134.JPEG" alt="Vůz 10"></div>
+						<div class="wc-item"><img src="assets/IMG_3135.JPEG" alt="Vůz 11"></div>
+						<div class="wc-item"><img src="assets/IMG_3136.JPEG" alt="Vůz 12"></div>
+						<div class="wc-item"><img src="assets/IMG_3137.JPEG" alt="Vůz 13"></div>
+						<div class="wc-item"><img src="assets/IMG_3138.JPEG" alt="Vůz 14"></div>
+						<div class="wc-item"><img src="assets/IMG_3139.JPEG" alt="Vůz 15"></div>
+						<div class="wc-item"><img src="assets/IMG_3140.JPEG" alt="Vůz 16"></div>
+						<div class="wc-item"><img src="assets/IMG_3141.JPEG" alt="Vůz 17"></div>
+						<div class="wc-item"><img src="assets/IMG_3142.JPEG" alt="Vůz 18"></div>
+						<div class="wc-item"><img src="assets/IMG_3143.JPEG" alt="Vůz 19"></div>
+						<div class="wc-item"><img src="assets/IMG_3144.JPEG" alt="Vůz 20"></div>
+						<div class="wc-item"><img src="assets/IMG_3145.JPEG" alt="Vůz 21"></div>
+						<div class="wc-item"><img src="assets/IMG_3146.JPEG" alt="Vůz 22"></div>
+						<div class="wc-item"><img src="assets/IMG_3147.JPEG" alt="Vůz 23"></div>
+						<div class="wc-item"><img src="assets/IMG_3148.JPEG" alt="Vůz 24"></div>
+						<div class="wc-item"><img src="assets/IMG_3149.JPEG" alt="Vůz 25"></div>
+					</div>
+					<button class="wc-btn prev" id="wc-prev" aria-label="Předchozí">◀</button>
+					<button class="wc-btn next" id="wc-next" aria-label="Další">▶</button>
+				</div>
+			</section>
+
+			<!-- sekce Fotogalerie smazána dle požadavku -->
+
+			<section id="kontakt">
+				<h2>Kontakt & rezervace</h2>
+				<div style="display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:12px">
+					<div class="card">
+						<p class="muted">Pro rezervace a cenovou nabídku nám zavolejte nebo napište. Preferujeme přímou domluvu pro upřesnění trasy, počtu osob a časů.</p>
+						<p style="margin:12px 0;"><strong>Tel:</strong> +420 123 456 789<br><strong>Email:</strong> info@deniska.cz</p>
+						<p class="muted">IČO: 09235787 • DIČ: CZ7409214065</p>
+					</div>
+					<div class="card">
+						<form onsubmit="event.preventDefault();alert('Děkujeme, zpráva odeslána (demo).');">
+							<div style="display:flex;flex-direction:column;gap:8px">
+								<input placeholder="Jméno a příjmení" required style="padding:10px;border-radius:8px;border:1px solid rgba(15,23,36,0.06)">
+								<input placeholder="Telefon" required style="padding:10px;border-radius:8px;border:1px solid rgba(15,23,36,0.06)">
+								<input placeholder="Email" style="padding:10px;border-radius:8px;border:1px solid rgba(15,23,36,0.06)">
+								<textarea placeholder="Zpráva / požadavek" style="padding:10px;border-radius:8px;border:1px solid rgba(15,23,36,0.06);min-height:110px"></textarea>
+								<button class="cta" type="submit">Odeslat</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer>
+			<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+				<div>© Autodoprava Deniska — Všechna práva vyhrazena</div>
+				<div class="muted">IČO: 09235787 • DIČ: CZ7409214065 • Ceny jsou smluvní, tento ceník je orientační.</div>
+			</div>
+		</footer>
+
+			<script>
+				// Malé uživatelské utilitky: odkrývání sekcí při scrollu
+				(function(){
+					const revealEls = document.querySelectorAll('main section');
+					const obs = new IntersectionObserver((entries)=>{
+						entries.forEach(e=>{
+							if(e.isIntersecting) e.target.style.transform = 'translateY(0)', e.target.style.opacity = 1;
+						});
+					}, {threshold:0.08});
+					revealEls.forEach(el=>{ el.style.opacity=0; el.style.transform='translateY(18px)'; el.style.transition='opacity .7s ease, transform .7s ease'; obs.observe(el); });
+				})();
+
+				/* Dřívější základní inicializace karuselu byla odstraněna - používá se nová, robustní implementace níže. */
+
+				/* --- Nová, robustnější implementace načítání a opakování poolu pro iluzi nekonečné smyčky --- */
+				(function(){
+					const container = document.querySelector('.wide-carousel');
+					const track = document.getElementById('wc-track');
+					const prevBtn = document.getElementById('wc-prev');
+					const nextBtn = document.getElementById('wc-next');
+					if(!track || !container) return;
+					let timer = null;
+
+					// utility
+					const exts = ['.JPEG','.jpeg','.JPG','.jpg','.png','.webp'];
+					function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]] } return a }
+					function loadImg(url, timeout = 1500){
+						return new Promise(res=>{
+							const img = new Image();
+							let done = false;
+							const onDone = (ok)=>{ if(done) return; done=true; img.onload = img.onerror = null; res(ok); };
+							img.onload = ()=> onDone(true);
+							img.onerror = ()=> onDone(false);
+							img.src = url;
+							setTimeout(()=> onDone(false), timeout);
+						});
+					}
+
+					async function discoverImages(){
+						// 1) manifest.json (preferred)
+						try{
+							const m = await fetch('assets/manifest.json');
+							if(m.ok){
+								const list = await m.json();
+								if(Array.isArray(list) && list.length){
+									return list.map(f=> 'assets/' + f);
+								}
+							}
+						}catch(e){/* ignore */}
+
+						// 2) fallback: pokusíme se načítat podle vzoru IMG_31xx mezi 3120-3150 (rychlý scan)
+						const pool = [];
+						outer: for(let i=3120;i<=3150;i++){
+							for(const ext of exts){
+								const url = `assets/IMG_${i}${ext}`;
+								/* eslint-disable no-await-in-loop */
+								const ok = await loadImg(url, 900);
+								if(ok){ pool.push(url); if(pool.length>=40) break outer; break; }
+							}
+						}
+						if(pool.length) return pool;
+
+						// 3) poslední fallback - vezmeme již vložené obrázky ve stránce
+						const existing = Array.from(document.querySelectorAll('.wc-item img')).map(i=>i.getAttribute('src')).filter(Boolean);
+						return existing.length? existing : [];
+					}
+
+					function clearTrack(){ track.innerHTML = ''; }
+
+					function buildTrackFromPool(pool){
+						clearTrack();
+						// opakujeme pool 3x aby vznikla illusion nekonečné smyčky
+						const repeats = 3;
+						for(let r=0;r<repeats;r++){
+							for(const src of pool){
+								const div = document.createElement('div'); div.className='wc-item out';
+								const img = document.createElement('img'); img.src = src; img.alt='Vůz';
+								div.appendChild(img);
+								track.appendChild(div);
+							}
+						}
+						return Array.from(track.querySelectorAll('.wc-item'));
+					}
+
+					// hlavní init
+					(async ()=>{
+						const pool = await discoverImages();
+						if(!pool || !pool.length) return; // nic k zobrazení
+						shuffle(pool);
+						const items = buildTrackFromPool(pool);
+						const originalCount = pool.length;
+						const total = items.length;
+						let idx = originalCount + 4; // start at middle copy's 5th image
+
+						function clamp(i){ return (i+total)%total }
+
+						function applyWidths(){
+							const contW = container.clientWidth - 40;
+							const AW = Math.round(contW * 0.5); // active width
+							const W1 = Math.round(AW * 0.8); // first neighbor 80% of active
+							const W2 = Math.round(AW * 0.7); // second neighbor 70% of active
+							// overlap: necháme hlavní překrývat sousedy o 1/4 své šířky
+							const overlap = Math.round(AW * 0.25);
+							items.forEach(it=>{ it.style.width = W2 + 'px'; it.style.height = '300px'; it.style.transform = 'translateX(0)'; });
+							const a = clamp(idx);
+							items[a].style.width = AW + 'px';
+							// first neighbors
+							const p1 = clamp(idx-1), n1 = clamp(idx+1);
+							items[p1].style.width = W1 + 'px';
+							items[n1].style.width = W1 + 'px';
+							// second neighbors
+							const p2 = clamp(idx-2), n2 = clamp(idx+2);
+							items[p2].style.width = W2 + 'px';
+							items[n2].style.width = W2 + 'px';
+							// store for render positioning
+							return {AW,W1,W2,overlap};
+						}
+
+						function render(){
+							items.forEach(it=>{ it.classList.remove('prev2','prev1','active','next1','next2','out'); it.classList.add('out'); });
+							const p2 = clamp(idx-2), p1 = clamp(idx-1), a = clamp(idx), n1 = clamp(idx+1), n2 = clamp(idx+2);
+							items[p2].classList.remove('out'); items[p2].classList.add('prev2');
+							items[p1].classList.remove('out'); items[p1].classList.add('prev1');
+							items[a].classList.remove('out'); items[a].classList.add('active');
+							items[n1].classList.remove('out'); items[n1].classList.add('next1');
+							items[n2].classList.remove('out'); items[n2].classList.add('next2');
+
+							const dims = applyWidths();
+							// center active
+							const containerCenter = container.clientWidth / 2;
+							const trackRect = track.getBoundingClientRect();
+							const activeRect = items[a].getBoundingClientRect();
+							const activeCenter = (activeRect.left - trackRect.left) + (activeRect.width/2);
+							const shift = containerCenter - activeCenter;
+							track.style.transition = 'transform .9s cubic-bezier(.22,.9,.26,1)';
+							track.style.transform = `translateX(${shift}px)`;
+							// now position neighbors slightly under the active (overlap)
+							// set z-index and opacities per requirement (reuse p1/p2/n1/n2 declared above)
+							items[a].style.zIndex = 6; items[a].style.opacity = 1; items[a].style.boxShadow = '0 24px 80px rgba(2,6,23,0.45)';
+							items[p1].style.zIndex = 3; items[p1].style.opacity = 0.6; items[p1].style.transform = `translateX(${ - (dims.AW - dims.W1 - dims.overlap)}px)`;
+							items[n1].style.zIndex = 3; items[n1].style.opacity = 0.6; items[n1].style.transform = `translateX(${ (dims.AW - dims.W1 - dims.overlap)}px)`;
+							items[p2].style.zIndex = 2; items[p2].style.opacity = 0.3; items[p2].style.transform = `translateX(${ - (dims.AW + dims.W1 - dims.overlap*2)}px)`;
+							items[n2].style.zIndex = 2; items[n2].style.opacity = 0.3; items[n2].style.transform = `translateX(${ (dims.AW + dims.W1 - dims.overlap*2)}px)`;
+						}
+
+						function reset(){ clearInterval(timer); timer = setInterval(()=> go(1), 3800); }
+
+						function go(dir){ idx = clamp(idx + dir); render();
+							// seamless reset when reaching edges of repeated pool
+							const thresh = originalCount + 2;
+							// move forward beyond safe zone
+							if(idx >= total - thresh){
+								setTimeout(()=>{
+									track.style.transition = 'none';
+									idx = idx - originalCount;
+									render();
+									requestAnimationFrame(()=> requestAnimationFrame(()=> track.style.transition = 'transform .75s cubic-bezier(.22,.9,.26,1)'));
+								}, 520);
+							}
+							// move backward beyond safe zone
+							if(idx < thresh){
+								setTimeout(()=>{
+									track.style.transition = 'none';
+									idx = idx + originalCount;
+									render();
+									requestAnimationFrame(()=> requestAnimationFrame(()=> track.style.transition = 'transform .75s cubic-bezier(.22,.9,.26,1)'));
+								}, 520);
+							}
+						}
+
+						if(nextBtn) nextBtn.addEventListener('click', ()=>{ go(1); reset(); });
+						if(prevBtn) prevBtn.addEventListener('click', ()=>{ go(-1); reset(); });
+
+						track.addEventListener('mouseenter', ()=> clearInterval(timer));
+						track.addEventListener('mouseleave', ()=> reset());
+
+						// initial render
+						render(); reset();
+						// ensure sizes recalc after images decoded
+						setTimeout(()=> render(), 300);
+					})();
+				})();
+
+				// Logika slideshow
+				(function(){
+					const slidesEl = document.getElementById('slides');
+					const slides = Array.from(slidesEl.children);
+					const total = slides.length;
+					let i = 0;
+					let timeout = null;
+
+					const dotsContainer = document.getElementById('dots');
+					for(let idx=0; idx<total; idx++){
+						const btn = document.createElement('button');
+						btn.className = 'dot-btn';
+						btn.addEventListener('click', ()=>{ goTo(idx); resetTimer(); });
+						dotsContainer.appendChild(btn);
+					}
+
+					const dotButtons = Array.from(dotsContainer.children);
+
+					// Přednačtení první fotky pro ostrý start
+					const firstBg = slides[0].style.backgroundImage.match(/url\(['"]?(.*)['"]?\)/);
+					if(firstBg && firstBg[1]){
+						const img = new Image(); img.src = firstBg[1];
+					}
+
+					function update(){
+						slidesEl.style.transform = `translateX(-${i*100}%)`;
+						dotButtons.forEach((d,idx)=> d.classList.toggle('active', idx===i));
+					}
+
+					function goTo(idx){ i = (idx + total) % total; update(); }
+					function next(){ goTo(i+1); }
+					function prev(){ goTo(i-1); }
+					function resetTimer(){ clearInterval(timeout); timeout = setInterval(next, 4200); }
+
+					document.getElementById('next').addEventListener('click', ()=>{ next(); resetTimer(); });
+					document.getElementById('prev').addEventListener('click', ()=>{ prev(); resetTimer(); });
+
+					// spuštění
+					update(); resetTimer();
+
+					// Pozastavit při najetí myší
+					const slider = document.querySelector('.slider');
+					slider.addEventListener('mouseenter', ()=> clearInterval(timeout));
+					slider.addEventListener('mouseleave', ()=> resetTimer());
+				})();
+						// Jednoduché lightbox zobrazení galerie
+						(function(){
+							const gallery = document.getElementById('mini-gallery');
+							if(!gallery) return;
+							const overlay = document.createElement('div');
+							overlay.id = 'lg-overlay';
+							overlay.style.position = 'fixed';
+							overlay.style.inset = 0;
+							overlay.style.background = 'rgba(0,0,0,0.85)';
+							overlay.style.display = 'flex';
+							overlay.style.alignItems = 'center';
+							overlay.style.justifyContent = 'center';
+							overlay.style.zIndex = 120;
+							overlay.style.padding = '20px';
+							overlay.style.cursor = 'pointer';
+							overlay.style.opacity = 0;
+							overlay.style.transition = 'opacity .25s ease';
+							const img = document.createElement('img');
+							img.style.maxWidth = '96%'; img.style.maxHeight = '92%'; img.style.borderRadius='10px';
+							overlay.appendChild(img);
+							overlay.addEventListener('click', ()=>{ overlay.style.opacity=0; setTimeout(()=>overlay.remove(),250); });
+							document.body.appendChild(overlay);
+							overlay.remove();
+
+							gallery.querySelectorAll('img').forEach(i=>{
+								i.style.cursor='zoom-in';
+								i.addEventListener('click', (e)=>{
+									img.src = e.currentTarget.src;
+									document.body.appendChild(overlay);
+									requestAnimationFrame(()=> overlay.style.opacity=1);
+								});
+							});
+
+							window.addEventListener('keydown',(e)=>{ if(e.key==='Escape'){ const ov = document.getElementById('lg-overlay'); if(ov) ov.style.opacity=0, setTimeout(()=>ov.remove(),250); } });
+						})();
+			</script>
+					<style>
+						/* lightbox small overrides */
+						#lg-overlay img{box-shadow:0 20px 60px rgba(0,0,0,0.6)}
+					</style>
+	</body>
+</html>
