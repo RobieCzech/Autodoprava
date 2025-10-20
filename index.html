@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Autodoprava Deniska — Profesionální přeprava osob a transfery</title>
-		<meta name="description" content="Autodoprava Deniska — transfery na letiště, svatby, oslavy, pronájem vozidel s řidičem. Profesionální a diskrétní doprava.">
+		<title>Autodoprava Deniska  Profesionální přeprava osob a transfery</title>
+		<meta name="description" content="Autodoprava Deniska - transfery na letiště, svatby, oslavy, pronájem vozidel s řidičem. Profesionální a diskrétní doprava.">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 		<style>
@@ -779,7 +779,6 @@
 					});
 				})();
 			</script>
-		</script>
 
 		<style>
 			/* lightbox small overrides */
@@ -932,17 +931,20 @@
 					height: 200px;
 				}
 			}
-		
-			html, body {
-				max-width: 100%;
-				overflow-x: hidden;
-			}
+			
+			@media (max-width: 480px) {
+				html, body {
+					overflow-x: hidden;
+				}
 
-			main, header, footer, section, .hero, .wide-carousel, .slider-wrap {
-				max-width: 100%;
-				overflow-x: hidden;
-				box-sizing: border-box;
-			}
+				main, header, footer, section, .hero, .wide-carousel, .slider-wrap {
+					box-sizing: border-box;
+					-webkit-overflow-scrolling: touch;
+					max-width: 100vw;	
+				}
 		</style>
 	</body>
 </html>
+</html>
+ 
+}
