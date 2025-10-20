@@ -778,6 +778,27 @@
 						refreshIcon();
 					});
 				})();
+
+					// hamburger menu toggle
+					const menuToggle = document.querySelector('.menu-toggle');
+					const navUl = document.querySelector('nav ul');
+					if(menuToggle && navUl){
+						menuToggle.addEventListener('click', ()=>{
+							const isVisible = navUl.style.display === 'block';
+							navUl.style.display = isVisible ? 'none' : 'block';
+						});
+					}
+
+				document.addEventListener('DOMContentLoaded', function () {
+					const menuToggle = document.getElementById('menu-toggle');
+					const navmenu = document.getElementById('nav-menu');
+
+					if (menuToggle && nav-menu) {
+						menuToggle.addEventListener('click', () => {
+							nav-menu.classList.toggle("show");
+						});
+					}
+				});
 			</script>
 
 		<style>
