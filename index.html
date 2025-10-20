@@ -9,47 +9,101 @@
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 		<style>
 					:root{
-						--accent:#0b6efd;
-						--accent-2: #07c1a3;
-						--dark:#0f1724;
-						--muted:#6b7280;
-						--card:#ffffff;
+						/* MODERNÍ, BAREVNÁ PALETA (SVĚTLÝ REŽIM) */
+						--accent: #44178d;        /* fialová */
+						--accent-2: #046475;     /* tyrkysová */
+						--accent-3: #10336b;     /* modrá */
+						--bg-top: #4d6797;       /* horní světlý odstín */
+						--bg-bottom: #b5b5b8;    /* spodní světlý odstín */
+						--nav-gray: rgba(121, 121, 124, 0.418); /* šedé poloprůhledné pozadí navigace (cca 50%) */
+						--dark:#051227;          /* primární text (světlý režim) */
+						--muted:#000000;         /* podružný text */
+						--card:#ffffff7e;          /* pozadí karet (světlý režim) */
 						--glass: rgba(255,255,255,0.06);
 						--max-width:1100px;
 						--radius:10px;
-						--shadow: 0 6px 20px rgba(16,24,40,0.08);
+						--shadow: 0 6px 20px rgba(15, 23, 37, 0.08);
 						--transition: 300ms cubic-bezier(.2,.8,.2,1);
-					--header-height:92px; /* increased so nav + gap create visible space under header */
-				--hero-scale:0.1666667; /* ~16.67% of full viewport area (reduced further) */
+						--header-height:92px;
+						--hero-scale:0.1666667;
 					}
+
+					/* TMAVÝ REŽIM - přepsáno proměnnými */
+					body.dark {
+						--accent: #8b5cf6;
+						--accent-2: #06b6d4;
+						--accent-3: #60a5fa;
+						--bg-top: #071026;
+						--bg-bottom: #0b1220;
+						--nav-gray: rgba(20,24,30,0.5);
+						--dark: #e6eef8;
+						--muted: #9aa4b2;
+						--card: #0f1724;
+						--glass: rgba(255,255,255,0.03);
+						--shadow: 0 8px 30px rgba(0,0,0,0.6);
+					}
+
 			*{box-sizing:border-box}
 			html,body{height:100%}
 					body{
 						margin:0;
 						font-family: 'Inter', Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 						color:var(--dark);
-						background: linear-gradient(180deg,#fbfdff 0%, #ffffff 100%);
+						background: linear-gradient(180deg,var(--bg-top) 0%, var(--bg-bottom) 100%);
+                        background-attachment: fixed;
 						-webkit-font-smoothing:antialiased;
 						-moz-osx-font-smoothing:grayscale;
 						scroll-behavior:smooth;
+						transition: background .45s ease, color .35s ease;
 					}
+
+					/* HEADER: šedé poloprůhledné pozadí s rozostřením */
 					header{
 						position:fixed;top:0;left:0;right:0;z-index:9999;
-						height:var(--header-height); /* výška hlavičky vytažená z proměnné */
+						height:var(--header-height);
 						display:flex;align-items:center;
 						backdrop-filter: blur(8px);
-						background:linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,255,255,0.8));
-						border-bottom:1px solid rgba(15,23,36,0.04);
+						/* šedé průhledné pozadí (50%) podle požadavku */
+						background: var(--nav-gray);
+						border-bottom:1px solid rgba(15,23,36,0.06);
+						transition: background .35s ease, border-color .35s ease;
 					}
+					body.dark header{
+						/* tmavý header: udržíme poloprůhlednost */
+						background: linear-gradient(90deg, rgba(10,14,20,0.6), rgba(8,12,18,0.6));
+						border-bottom:1px solid rgba(255,255,255,0.04);
+					}
+
 				/* Navigační lišta: používá 100% výšky hlavičky, horizontální padding pouze */
 				.nav{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:100%;padding:0 20px}
 			.brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--dark);font-size:18px;letter-spacing:0.2px}
-			.brand .dot{width:14px;height:14px;border-radius:4px;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 8px 28px rgba(11,110,237,0.12)}
+			.brand .dot{width:14px;height:14px;border-radius:4px;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 8px 28px rgba(0,0,0,0.08)}
 			nav ul{list-style:none;margin:0;padding:0;display:flex;gap:20px;align-items:center}
 			nav a{color:var(--dark);text-decoration:none;font-weight:600;padding:8px 10px;border-radius:8px;transition:var(--transition)}
 			nav a:hover{background:var(--glass)}
-			.cta{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 16px;border-radius:12px;font-weight:700;box-shadow:0 8px 24px rgba(11,110,237,0.12);transition:transform .18s ease, box-shadow .18s ease}
-			.cta:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(11,110,237,0.16)}
+			/* CTA v navigaci už není tlačítko — vypadají všechny odkazy konzistentně */
+			nav a.cta{
+				/* odstraněno výrazné tlačítko; zanecháme jemný akcent pomocí gradientového textu */
+				background:transparent;
+				box-shadow:none;
+				padding:8px 10px;
+				border-radius:8px;
+				font-weight:700;
+				/* gradient text pro jemný zvýrazněný odkaz */
+				background-image: linear-gradient(90deg,var(--accent),var(--accent-2));
+				-webkit-background-clip: text;
+				background-clip: text;
+				color: transparent;
+			}
+			/* pokud bys chtěl, aby CTA vypadalo ještě decentněji v tmavém režimu, zachováme to přes proměnné */
+
+			/* Ikona měsíce vpravo (bez dalších tlačítek) */
+			.header-actions{display:flex;align-items:center;gap:10px}
+			.moon-btn{
+				background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer;font-size:18px;line-height:1;
+				color:var(--dark);
+			}
+			.moon-btn:hover{background:var(--glass)}
 
 				/* Hlavní obsah: rezervujeme prostor pro pevnou hlavičku a přidáme mezeru pod ní */
 				main{max-width:var(--max-width);padding-top:calc(var(--header-height) + 1.2cm);margin:0 auto 80px;padding-left:20px;padding-right:20px}
@@ -69,7 +123,8 @@
 				   Na menších obrazovkách (tablety/mobily) je velké odsazení nežádoucí,
 				   proto je v media query přepsáno na přijatelnou hodnotu (24px). */
 				/* Levý sloupec nyní má pevnou šířku v pixelech pro snadnou úpravu */
-				.hero .left{width:480px;min-width:320px;display:flex;flex-direction:column;justify-content:center;margin-top:210px !important}
+			
+                .hero .left{width:480px;min-width:320px;display:flex;flex-direction:column;justify-content:center;margin-top:210px !important}
 			.hero .right{flex:0 0 66.6666%;display:flex;align-items:center;justify-content:center}
 					/* Obrázkový slider: zajistit dostatečnou výšku a mezeru pod ním */
 					/* Obrázkový slider: malá čtvercová preview v hero (aspect-ratio 1:1) */
@@ -85,9 +140,86 @@
 			.hero h1{font-size:40px;margin:0 0 14px;color:var(--dark);line-height:1.05}
 			.hero h1 strong{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
 			.hero p{margin:0 0 18px;color:var(--muted);line-height:1.6}
-			.buttons{display:flex;gap:12px}
+            /* Obecné pro CTA */
+            .buttons a.cta {
+             display: inline-block;
+             font-weight: 700;
+             font-size: 15px;
+             letter-spacing: 0.3px;
+             padding: 12px 28px;
+             border-radius: 14px;
+             text-decoration: none;
+             transition: all 0.35s ease;
+             cursor: pointer;
+             backdrop-filter: blur(10px);
+            }
 
-			.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+            /* Primární tlačítko – moderní glass + gradient */
+            .primary-btn {
+             color: #fff;
+             background: linear-gradient(135deg, #b584ec, #3d7ed3);
+             box-shadow: 0 6px 20px rgba(0, 123, 255, 0.25);
+             border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+            .primary-btn:hover {
+             background: linear-gradient(135deg, #339dff, #33d1ff);
+             transform: translateY(-3px);
+             box-shadow: 0 10px 30px rgba(0, 123, 255, 0.35);
+            }
+
+            /* Sekundární tlačítko – elegantní outline */
+            .secondary-btn {
+             color: #ffffff;
+             background: linear-gradient(135deg, #b584ec, #3d7ed3);
+             border: 2px solid rgba(0, 123, 255, 0.3);
+             box-shadow: 0 6px 20px rgba(0, 123, 255, 0.25);
+            }
+            .secondary-btn:hover {
+             color: #fff;
+             background: linear-gradient(135deg, #007bff, #00c6ff);
+             border-color: transparent;
+             transform: translateY(-3px);
+             box-shadow: 0 8px 28px rgba(0, 123, 255, 0.35);
+            }
+
+            /* Lepší odstupy mezi tlačítky */
+            .buttons {
+             display: flex;
+             gap: 16px;
+             flex-wrap: wrap;
+            }
+
+            .primary-btn {
+             animation: pulse 3s ease-in-out infinite;
+            }
+             @keyframes pulse {
+             0%,100% { box-shadow: 0 6px 20px rgba(0,123,255,0.25); }
+             50% { box-shadow: 0 10px 28px rgba(0,123,255,0.35); }
+            }
+
+            /* Styl tlačítka Odeslat v kontaktním formuláři */
+            #kontakt button.cta {
+             color: #fff;
+             background: linear-gradient(135deg, #b584ec, #3d7ed3);
+             box-shadow: 0 6px 20px rgba(0, 123, 255, 0.25);
+             border: 1px solid rgba(255, 255, 255, 0.3);
+             border-radius: 12px;
+             padding: 12px 0;
+             width: 100%;
+             font-weight: 700;
+             letter-spacing: 0.3px;
+             cursor: pointer;
+             transition: all 0.3s ease;
+            }
+
+            #kontakt button.cta:hover {
+             background: linear-gradient(135deg, #339dff, #33d1ff);
+             transform: translateY(-3px);
+             box-shadow: 0 10px 30px rgba(0, 123, 255, 0.35);
+            }
+
+
+			.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;transition:background .3s ease,color .3s ease}
 			.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px}
 			.service{padding:14px;border-radius:12px;border:1px solid rgba(15,23,36,0.04)}
 			.service h4{margin:0 0 6px}
@@ -182,6 +314,11 @@
 						<li><a class="cta" href="#kontakt">Rezervace</a></li>
 					</ul>
 				</nav>
+
+				<!-- jen ikonka měsíčku (bez dalších tlačítek) -->
+				<div class="header-actions" aria-hidden="false" style="margin-left:12px">
+					<button class="moon-btn" id="darkToggle" aria-pressed="false" title="Přepnout tmavý režim">🌙</button>
+				</div>
 			</div>
 		</header>
 
@@ -191,14 +328,15 @@
 					<h1>Autodoprava Deniska — profesionální přeprava osob a transfery</h1>
 					<p>Diskrétní a spolehlivé služby přepravy: transfery na letiště, osobní přepravy mezi městy, pronájem vozidla s řidičem pro svatby a oslavy nebo přeprava menšího nákladu. Moderní vozový park a zkušený řidič — komfort, bezpečí a přesnost.</p>
 					<div class="buttons">
-										<a class="cta" href="#kontakt">Objednat transfer</a>
-										<a class="cta" href="#cenik">Zobrazit ceník</a>
-					</div>
+                        <a class="cta primary-btn" href="#kontakt">Objednat transfer</a>
+                        <a class="cta secondary-btn" href="#cenik">Zobrazit ceník</a>
+                    </div>
+
 					<div class="card">
 						<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
 							<div>
 								<div style="font-weight:700">Rychlá hotline</div>
-								<div class="muted">Tel: +420 123 456 789 • email: info@deniska.cz</div>
+								<div class="muted">Tel: +420 777 135 004 / +420 776 135 001 • email: renedolezel@seznam.cz</div>
 							</div>
 							<div class="muted">IČO: 09235787 • DIČ: CZ7409214065</div>
 						</div>
@@ -333,11 +471,11 @@
 				<div style="display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:12px">
 					<div class="card">
 						<p class="muted">Pro rezervace a cenovou nabídku nám zavolejte nebo napište. Preferujeme přímou domluvu pro upřesnění trasy, počtu osob a časů.</p>
-						<p style="margin:12px 0;"><strong>Tel:</strong> +420 123 456 789<br><strong>Email:</strong> info@deniska.cz</p>
+						<p style="margin:12px 0;"><strong>Tel:</strong> +420 777 135 004 / +420 776 135 001<br><strong>Email:</strong> renedolezel@seznam.cz</p>
 						<p class="muted">IČO: 09235787 • DIČ: CZ7409214065</p>
 					</div>
 					<div class="card">
-						<form onsubmit="event.preventDefault();alert('Děkujeme, zpráva odeslána (demo).');">
+						<form action="send.php" method="POST">
 							<div style="display:flex;flex-direction:column;gap:8px">
 								<input placeholder="Jméno a příjmení" required style="padding:10px;border-radius:8px;border:1px solid rgba(15,23,36,0.06)">
 								<input placeholder="Telefon" required style="padding:10px;border-radius:8px;border:1px solid rgba(15,23,36,0.06)">
@@ -586,41 +724,65 @@
 					slider.addEventListener('mouseenter', ()=> clearInterval(timeout));
 					slider.addEventListener('mouseleave', ()=> resetTimer());
 				})();
-						// Jednoduché lightbox zobrazení galerie
-						(function(){
-							const gallery = document.getElementById('mini-gallery');
-							if(!gallery) return;
-							const overlay = document.createElement('div');
-							overlay.id = 'lg-overlay';
-							overlay.style.position = 'fixed';
-							overlay.style.inset = 0;
-							overlay.style.background = 'rgba(0,0,0,0.85)';
-							overlay.style.display = 'flex';
-							overlay.style.alignItems = 'center';
-							overlay.style.justifyContent = 'center';
-							overlay.style.zIndex = 120;
-							overlay.style.padding = '20px';
-							overlay.style.cursor = 'pointer';
-							overlay.style.opacity = 0;
-							overlay.style.transition = 'opacity .25s ease';
-							const img = document.createElement('img');
-							img.style.maxWidth = '96%'; img.style.maxHeight = '92%'; img.style.borderRadius='10px';
-							overlay.appendChild(img);
-							overlay.addEventListener('click', ()=>{ overlay.style.opacity=0; setTimeout(()=>overlay.remove(),250); });
+
+				// Jednoduché lightbox zobrazení galerie
+				(function(){
+					const gallery = document.getElementById('mini-gallery');
+					if(!gallery) return;
+					const overlay = document.createElement('div');
+					overlay.id = 'lg-overlay';
+					overlay.style.position = 'fixed';
+					overlay.style.inset = 0;
+					overlay.style.background = 'rgba(0,0,0,0.85)';
+					overlay.style.display = 'flex';
+					overlay.style.alignItems = 'center';
+					overlay.style.justifyContent = 'center';
+					overlay.style.zIndex = 120;
+					overlay.style.padding = '20px';
+					overlay.style.cursor = 'pointer';
+					overlay.style.opacity = 0;
+					overlay.style.transition = 'opacity .25s ease';
+					const img = document.createElement('img');
+					img.style.maxWidth = '96%'; img.style.maxHeight = '92%'; img.style.borderRadius='10px';
+					overlay.appendChild(img);
+					overlay.addEventListener('click', ()=>{ overlay.style.opacity=0; setTimeout(()=>overlay.remove(),250); });
+					document.body.appendChild(overlay);
+					overlay.remove();
+
+					gallery.querySelectorAll('img').forEach(i=>{
+						i.style.cursor='zoom-in';
+						i.addEventListener('click', (e)=>{
+							img.src = e.currentTarget.src;
 							document.body.appendChild(overlay);
-							overlay.remove();
+							requestAnimationFrame(()=> overlay.style.opacity=1);
+						});
+					});
 
-							gallery.querySelectorAll('img').forEach(i=>{
-								i.style.cursor='zoom-in';
-								i.addEventListener('click', (e)=>{
-									img.src = e.currentTarget.src;
-									document.body.appendChild(overlay);
-									requestAnimationFrame(()=> overlay.style.opacity=1);
-								});
-							});
+					window.addEventListener('keydown',(e)=>{ if(e.key==='Escape'){ const ov = document.getElementById('lg-overlay'); if(ov) ov.style.opacity=0, setTimeout(()=>ov.remove(),250); } });
+				})();
 
-							window.addEventListener('keydown',(e)=>{ if(e.key==='Escape'){ const ov = document.getElementById('lg-overlay'); if(ov) ov.style.opacity=0, setTimeout(()=>ov.remove(),250); } });
-						})();
+				/* --- TMAVÝ REŽIM (ikona měsíčku) --- */
+				(function(){
+					const darkBtn = document.getElementById('darkToggle');
+					// inicializace podle uložené preference
+					try {
+						const saved = localStorage.getItem('deniska-dark');
+						if(saved === '1') document.body.classList.add('dark');
+					}catch(e){}
+					// nastav ikonu podle stavu
+					function refreshIcon(){
+						const isDark = document.body.classList.contains('dark');
+						darkBtn.textContent = isDark ? '☀️' : '🌙';
+						darkBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+						darkBtn.title = isDark ? 'Přepnout světlý režim' : 'Přepnout tmavý režim';
+					}
+					refreshIcon();
+					darkBtn.addEventListener('click', ()=>{
+						const isDark = document.body.classList.toggle('dark');
+						try{ localStorage.setItem('deniska-dark', isDark ? '1' : '0'); }catch(e){}
+						refreshIcon();
+					});
+				})();
 			</script>
 					<style>
 						/* lightbox small overrides */
