@@ -124,13 +124,13 @@
 				   proto je v media query přepsáno na přijatelnou hodnotu (24px). */
 				/* Levý sloupec nyní má pevnou šířku v pixelech pro snadnou úpravu */
 			
-                .hero .left{width:480px;min-width:320px;display:flex;flex-direction:column;justify-content:center;margin-top:40px !important}
+                .hero .left{width:480px;min-width:320px;display:flex;flex-direction:column;justify-content:center;margin-top:210px !important}
 			.hero .right{flex:0 0 66.6666%;display:flex;align-items:center;justify-content:center}
 					/* Obrázkový slider: zajistit dostatečnou výšku a mezeru pod ním */
 					/* Obrázkový slider: malá čtvercová preview v hero (aspect-ratio 1:1) */
 					.slider-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:48px}
 					/* Uživatelská požadavek: posunout pouze slideshow dolů pod navigaci */
-					.slider-wrap{margin-top:20px !important}
+					.slider-wrap{margin-top:500px !important}
 					.slider{max-width:420px;width:100%;aspect-ratio:1/1;border-radius:12px;overflow:hidden}
 					.slides{height:100%}
 					.slide{height:100%}
@@ -247,7 +247,7 @@
 				/* Posunout sekci 'Naše služby' a následující obsah o 100px dolů */
 				#sluzby{margin-top:-200px}
 				/* Zajistit jasné oddělení hero od následujících sekcí */
-				.hero{margin-bottom:120px}
+				.hero{margin-bottom:640px}
 				/* Mřížka galerie */
 			.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-top:12px}
 			.gallery-grid img{width:100%;height:110px;object-fit:cover;border-radius:10px;transition:transform .25s ease;display:block}
@@ -262,7 +262,7 @@
 											/* Přepsat velké margin-top na mobilu */
 											.hero .left{margin-top:24px !important; width:100%}
 											/* Posun sekce #sluzby menší zařízení */
-											#sluzby{margin-top:0px}
+											#sluzby{margin-top:48px}
 												.slider{max-width:100%;aspect-ratio: auto}
 											}
 					@media (max-width:720px){
@@ -348,16 +348,16 @@
 											<div class="slider card" aria-label="Slideshow vozového parku">
 												<div class="slides" id="slides">
 							<!-- 10 slide images from assets -->
-							<div class="slide" role="img" aria-label="Vozidlo 1"><img src="assets/IMG_3125.webp" alt="Vůz 1" loading="eager"></div>
-							<div class="slide" role="img" aria-label="Vozidlo 2"><img src="assets/IMG_3126.webp" alt="Vůz 2" loading="lazy"></div>
-							<div class="slide" role="img" aria-label="Vozidlo 3"><img src="assets/IMG_3127.webp" alt="Vůz 3" loading="lazy"></div>
-							<div class="slide" role="img" aria-label="Vozidlo 4"><img src="assets/IMG_3128.webp" alt="Vůz 4" loading="lazy"></div>
-							<div class="slide" role="img" aria-label="Vozidlo 5"><img src="assets/IMG_3129.webp" alt="Vůz 5" loading="lazy"></div>
-							<div class="slide" role="img" aria-label="Vozidlo 6"><img src="assets/IMG_3130.webp" alt="Vůz 6" loading="lazy"></div>
-							<div class="slide" role="img" aria-label="Vozidlo 7"><img src="assets/IMG_3131.webp" alt="Vůz 7" loading="lazy"></div>
-							<div class="slide" role="img" aria-label="Vozidlo 8"><img src="assets/IMG_3132.webp" alt="Vůz 8" loading="lazy"></div>
-							<div class="slide" role="img" aria-label="Vozidlo 9"><img src="assets/IMG_3133.webp" alt="Vůz 9" loading="lazy"></div>
-							<div class="slide" role="img" aria-label="Vozidlo 10"><img src="assets/IMG_3134.webp" alt="Vůz 10" loading="lazy"></div>
+							<div class="slide" role="img" aria-label="Vozidlo 1"><img src="assets/IMG_3125.JPEG" alt="Vůz 1" loading="eager"></div>
+							<div class="slide" role="img" aria-label="Vozidlo 2"><img src="assets/IMG_3126.JPEG" alt="Vůz 2" loading="lazy"></div>
+							<div class="slide" role="img" aria-label="Vozidlo 3"><img src="assets/IMG_3127.JPEG" alt="Vůz 3" loading="lazy"></div>
+							<div class="slide" role="img" aria-label="Vozidlo 4"><img src="assets/IMG_3128.JPEG" alt="Vůz 4" loading="lazy"></div>
+							<div class="slide" role="img" aria-label="Vozidlo 5"><img src="assets/IMG_3129.JPEG" alt="Vůz 5" loading="lazy"></div>
+							<div class="slide" role="img" aria-label="Vozidlo 6"><img src="assets/IMG_3130.JPEG" alt="Vůz 6" loading="lazy"></div>
+							<div class="slide" role="img" aria-label="Vozidlo 7"><img src="assets/IMG_3131.JPEG" alt="Vůz 7" loading="lazy"></div>
+							<div class="slide" role="img" aria-label="Vozidlo 8"><img src="assets/IMG_3132.JPEG" alt="Vůz 8" loading="lazy"></div>
+							<div class="slide" role="img" aria-label="Vozidlo 9"><img src="assets/IMG_3133.JPEG" alt="Vůz 9" loading="lazy"></div>
+							<div class="slide" role="img" aria-label="Vozidlo 10"><img src="assets/IMG_3134.JPEG" alt="Vůz 10" loading="lazy"></div>
 						</div>
 						<div class="controls">
 							<button class="btn" id="prev" aria-label="Předchozí">❮</button>
@@ -428,31 +428,31 @@
 				<div class="wide-carousel" aria-label="Vozový park - carousel">
 					<div class="wc-track" id="wc-track">
 						<!-- obrázky budou vloženy sem skriptem nebo staticky -->
-						<div class="wc-item"><img src="assets/IMG_3125.webp" alt="Vůz 1" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3126.webp" alt="Vůz 2" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3127.webp" alt="Vůz 3" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3128.webp" alt="Vůz 4" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3129.webp" alt="Vůz 5" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3130.webp" alt="Vůz 6" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3131.webp" alt="Vůz 7" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3132.webp" alt="Vůz 8" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3133.webp" alt="Vůz 9" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3134.webp" alt="Vůz 10" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3135.webp" alt="Vůz 11" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3136.webp" alt="Vůz 12" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3137.webp" alt="Vůz 13" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3138.webp" alt="Vůz 14" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3139.webp" alt="Vůz 15" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3140.webp" alt="Vůz 16" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3141.webp" alt="Vůz 17" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3142.webp" alt="Vůz 18" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3143.webp" alt="Vůz 19" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3144.webp" alt="Vůz 20" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3145.webp" alt="Vůz 21" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3146.webp" alt="Vůz 22" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3147.webp" alt="Vůz 23" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3148.webp" alt="Vůz 24" loading="lazy"></div>
-						<div class="wc-item"><img src="assets/IMG_3149.webp" alt="Vůz 25" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3125.JPEG" alt="Vůz 1" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3126.JPEG" alt="Vůz 2" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3127.JPEG" alt="Vůz 3" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3128.JPEG" alt="Vůz 4" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3129.JPEG" alt="Vůz 5" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3130.JPEG" alt="Vůz 6" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3131.JPEG" alt="Vůz 7" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3132.JPEG" alt="Vůz 8" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3133.JPEG" alt="Vůz 9" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3134.JPEG" alt="Vůz 10" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3135.JPEG" alt="Vůz 11" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3136.JPEG" alt="Vůz 12" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3137.JPEG" alt="Vůz 13" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3138.JPEG" alt="Vůz 14" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3139.JPEG" alt="Vůz 15" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3140.JPEG" alt="Vůz 16" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3141.JPEG" alt="Vůz 17" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3142.JPEG" alt="Vůz 18" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3143.JPEG" alt="Vůz 19" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3144.JPEG" alt="Vůz 20" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3145.JPEG" alt="Vůz 21" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3146.JPEG" alt="Vůz 22" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3147.JPEG" alt="Vůz 23" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3148.JPEG" alt="Vůz 24" loading="lazy"></div>
+						<div class="wc-item"><img src="assets/IMG_3149.JPEG" alt="Vůz 25" loading="lazy"></div>
 					</div>
 					<button class="wc-btn prev" id="wc-prev" aria-label="Předchozí">◀</button>
 					<button class="wc-btn next" id="wc-next" aria-label="Další">▶</button>
@@ -515,7 +515,7 @@
 					let timer = null;
 
 					// utility
-					const exts = ['.webp','.jpeg','.JPG','.jpg','.png','.webp'];
+					const exts = ['.JPEG','.jpeg','.JPG','.jpg','.png','.webp'];
 					function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]] } return a }
 					function loadImg(url, timeout = 1500){
 						return new Promise(res=>{
