@@ -304,15 +304,17 @@
 		<header>
 			<div class="nav">
 				<div class="brand"><span class="dot"></span>Autodoprava Deniska</div>
-				<nav>
-					<ul>
-						<li><a href="#sluzby">Služby</a></li>
-						<li><a href="#cenik">Ceník</a></li>
-						<li><a href="#vozovy-park">Vozový park</a></li>
-						<li><a href="#kontakt">Kontakt</a></li>
-						<li><a class="cta" href="#kontakt">Rezervace</a></li>
-					</ul>
-				</nav>
+					<nav>
+  						<div class="menu-toggle" id="menu-toggle">☰</div>
+ 				 		<ul id="nav-menu">
+   				 			<li><a href="#sluzby">Služby</a></li>
+    						<li><a href="#cenik">Ceník</a></li>
+    						<li><a href="#vozovy-park">Vozový park</a></li>
+    						<li><a href="#kontakt">Kontakt</a></li>
+    						<li><a class="cta" href="#kontakt">Rezervace</a></li>
+  						</ul>
+					</nav>
+
 
 				<!-- jen ikonka měsíčku (bez dalších tlačítek) -->
 				<div class="header-actions" aria-hidden="false" style="margin-left:12px">
@@ -777,9 +779,159 @@
 					});
 				})();
 			</script>
-					<style>
-						/* lightbox small overrides */
-						#lg-overlay img{box-shadow:0 20px 60px rgba(0,0,0,0.6)}
-					</style>
+		</script>
+
+		<style>
+			/* lightbox small overrides */
+			#lg-overlay img {
+				box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+			}
+
+			/* 🌍 Univerzální responzivní úpravy pro všechna zařízení */
+
+			/* ===== Tablety (šířka do 1024px) ===== */
+			@media (max-width: 1024px) {
+				header {
+					height: 80px;
+				}
+
+				.nav {
+					padding: 0 16px;
+				}
+
+				.hero {
+					flex-direction: column;
+					align-items: center;
+					gap: 40px;
+					text-align: center;
+					height: auto;
+				}
+
+				.hero .left {
+					width: 100%;
+					margin-top: 60px !important;
+					align-items: center;
+				}
+
+				.hero h1 {
+					font-size: 32px;
+				}
+
+				.hero p {
+					font-size: 16px;
+					max-width: 90%;
+				}
+
+				.slider-wrap {
+					margin-top: 60px !important;
+				}
+
+				.services {
+					grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+				}
+
+				.wide-carousel {
+					padding: 0 10px;
+				}
+			}
+
+			/* Výchozí stav – hamburger menu se na PC (nad 768px) nezobrazuje */
+			.menu-toggle {
+  				display: none;
+			}
+			/* ===== Mobily (šířka do 768px) ===== */
+			@media (max-width: 768px) {
+				header {
+					backdrop-filter: blur(12px);
+					background: rgba(255, 255, 255, 0.8);
+				}
+
+				nav ul {
+					display: none; /* schováme klasické menu */
+				}
+
+				.brand {
+					font-size: 16px;
+				}
+
+				/* jednoduché mobilní menu ikonka */
+				.menu-toggle {
+					display: block;
+					font-size: 22px;
+					cursor: pointer;
+					color: var(--dark);
+				}
+
+				.hero h1 {
+					font-size: 26px;
+				}
+
+				.hero p {
+					font-size: 15px;
+				}
+
+				.buttons {
+					flex-direction: column;
+					width: 100%;
+				}
+
+				.cta {
+					width: 100%;
+					text-align: center;
+				}
+
+				.service {
+					text-align: center;
+				}
+
+				.gallery-grid img {
+					height: 90px;
+				}
+
+				footer {
+					font-size: 13px;
+					text-align: center;
+				}
+			}
+
+			/* ===== Extra malé mobily (šířka do 480px) ===== */
+			@media (max-width: 480px) {
+				body {
+					font-size: 14px;
+				}
+
+				.hero h1 {
+					font-size: 22px;
+				}
+
+				.hero p {
+					font-size: 14px;
+				}
+
+				.cta {
+					padding: 10px;
+					font-size: 15px;
+				}
+
+				input,
+				textarea {
+					font-size: 15px;
+				}
+
+				.price-row {
+					flex-direction: column;
+					align-items: flex-start;
+					gap: 4px;
+				}
+
+				.wide-carousel {
+					height: auto;
+				}
+
+				.wc-item img {
+					height: 200px;
+				}
+			}
+		</style>
 	</body>
 </html>
