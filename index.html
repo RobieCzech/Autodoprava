@@ -904,8 +904,66 @@
 					font-size: 22px;
 					cursor: pointer;
 					color: var(--dark);
+					user-select: none;
+					transition: relative;
+					z-index: 1001;
+				}
+				.menu-toggle:hover {
+					transform: scale(1.1)
 				}
 
+				nav ul {
+					position: absolute;
+					top: var(--header-height);
+					right: 0;
+					background: var(--light);
+					box-shadow: rgba(255, 255, 255, 0.95);
+					backdrop-filter: blur(12px);
+					box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+					flex-direction: column;
+					align-items: flex-start;
+					width: 80%;
+					max-width: 320px;
+					margin: 0;
+					padding: 12px 0;
+					border-radius:0 0 16px 16px;
+					transform: translateY(-20px);
+					opacity: 0;
+					pointer-events: none;
+					transition: all 0.35s ease;
+					z-index: 1000;
+				}
+
+				nav ul.show {
+					transform: translateY(0);
+					opacity: 1;
+					pointer-events: auto;
+				}
+				nav ul li {
+					width: 100%;
+					border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+				}
+				nav ul li:last-child {
+					border-bottom: none;
+				}
+				nav ul li a {
+					display: block;
+					width: 100%;
+					padding: 16px 22px;
+					color: var(--dark);
+					font-size: 17px;
+					font-weight: 600;
+					text-decoration: none;
+					transition: background 0.2s ease, color 0.2s ease;
+				}
+				nav ul li a:hover {
+					background: rgba(11, 110, 237, 0.08);
+					color: var(--blue);
+				}
+				header {
+					position: relative
+					z-index: 1000;
+				}
 				.hero h1 {
 					font-size: 26px;
 				}
