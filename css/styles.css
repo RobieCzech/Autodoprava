@@ -11516,12 +11516,11 @@ header.masthead .container {
   }
 }
 
-/* VĚTŠÍ LOGO – POUZE MOBIL/TABLET */
+/* --- Fix velikosti loga POUZE NA MOBILECH --- */
 @media (max-width: 991.98px) {
-  /* přebijeme jak normální stav, tak .navbar-shrink */
-  #mainNav .navbar-brand img,
-  #mainNav.navbar-shrink .navbar-brand img {
-    height: 1.5rem !important;   /* uprav si třeba na 3.6rem / 4rem */
+  nav#mainNav.navbar.navbar-expand-lg.navbar-dark.fixed-top .navbar-brand img {
+    height: 1.8rem !important;   /* změň podle potřeby (např. 2rem, 2.5rem...) */
     width: auto !important;
+    transition: none !important; /* vypneme animaci zmenšení */
   }
 }
