@@ -42,6 +42,33 @@ window.addEventListener('DOMContentLoaded', event => {
         navbarShrink();
         document.addEventListener('scroll', navbarShrink);
     }
+    if (window.innerWidth <= 991) {
+    // vypneme shrinkování
+    window.removeEventListener('scroll', navbarShrink);
+    document.removeEventListener('scroll', navbarShrink);
+
+    // pevné rozměry na mobilech
+    if (logo) {
+      logo.style.height = '2.2rem';
+      logo.style.transition = 'none';
+    }
+    if (navbar) {
+      navbar.style.paddingTop = '0.9rem';
+      navbar.style.paddingBottom = '0.9rem';
+    }
+
+    // jistota: kdyby se přidal .navbar-shrink, hned ho zrušíme
+    const observer = new MutationObserver(() => {
+      navbar.classList.remove('navbar-shrink');
+    });
+    observer.observe(navbar, { attributes: true, attributeFilter: ['class'] });
+
+    navbar.classList.remove('navbar-shrink');
+} else {
+    // desktop – ponech tvé původní chování
+    navbarShrink();
+    document.addEventListener('scroll', navbarShrink);
+}
 
     // ScrollSpy a zbytek Bootstrapu
     const mainNav = document.body.querySelector('#mainNav');
