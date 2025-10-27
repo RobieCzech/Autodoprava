@@ -1,44 +1,58 @@
-/*!
-* Start Bootstrap - Agency v7.0.12 (https://startbootstrap.com/theme/agency)
-* Copyright 2013-2023 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-agency/blob/master/LICENSE)
-*/
-//
-// Scripts
-// 
-
 window.addEventListener('DOMContentLoaded', event => {
+    const navbar = document.querySelector('#mainNav');
+    const logo = navbar?.querySelector('.navbar-brand img');
 
-    // Navbar shrink function
-    var navbarShrink = function () {
-        const navbarCollapsible = document.body.querySelector('#mainNav');
-        if (!navbarCollapsible) {
-            return;
-        }
+    // Původní funkce, která shrinkuje navbar
+    function navbarShrink() {
+        if (!navbar) return;
+
+        // Pokud jsme nahoře
         if (window.scrollY === 0) {
-            navbarCollapsible.classList.remove('navbar-shrink')
+            navbar.classList.remove('navbar-shrink');
         } else {
-            navbarCollapsible.classList.add('navbar-shrink')
+            navbar.classList.add('navbar-shrink');
+        }
+    }
+
+    // === FIX PRO MOBILY ===
+    if (window.innerWidth <= 991) {
+        // Odpojíme původní chování
+        window.removeEventListener('scroll', navbarShrink);
+        document.removeEventListener('scroll', navbarShrink);
+
+        // Nastavíme logo pevně
+        if (logo) {
+            logo.style.height = '70px';
+            logo.style.marginTop = '15px';
+            logo.style.transition = 'none';
         }
 
-    };
+        // Zakážeme přidávání "navbar-shrink" na mobilech
+        const observer = new MutationObserver(() => {
+            if (navbar.classList.contains('navbar-shrink')) {
+                navbar.classList.remove('navbar-shrink');
+            }
+        });
+        observer.observe(navbar, { attributes: true, attributeFilter: ['class'] });
 
-    // Shrink the navbar 
-    navbarShrink();
+        // Ujistíme se, že se nespustí žádný shrink po načtení
+        navbar.classList.remove('navbar-shrink');
+    } else {
+        // === DESKTOP – původní funkce zůstává ===
+        navbarShrink();
+        document.addEventListener('scroll', navbarShrink);
+    }
 
-    // Shrink the navbar when page is scrolled
-    document.addEventListener('scroll', navbarShrink);
-
-    //  Activate Bootstrap scrollspy on the main nav element
+    // ScrollSpy a zbytek Bootstrapu
     const mainNav = document.body.querySelector('#mainNav');
     if (mainNav) {
         new bootstrap.ScrollSpy(document.body, {
             target: '#mainNav',
             rootMargin: '0px 0px -40%',
         });
-    };
+    }
 
-    // Collapse responsive navbar when toggler is visible
+    // Zavření menu při kliknutí (na mobilech)
     const navbarToggler = document.body.querySelector('.navbar-toggler');
     const responsiveNavItems = [].slice.call(
         document.querySelectorAll('#navbarResponsive .nav-link')
@@ -50,5 +64,4 @@ window.addEventListener('DOMContentLoaded', event => {
             }
         });
     });
-
 });
