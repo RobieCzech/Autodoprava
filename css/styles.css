@@ -11506,8 +11506,8 @@ header.masthead .container {
     padding-bottom: 0.9rem !important; 
   }
   #mainNav.navbar-shrink { 
-    padding-top: 0.9rem !important; 
-    padding-bottom: 0.9rem !important; 
+    padding-top: 0rem !important; 
+    padding-bottom: 0rem !important; 
     background-color: #212529; /* zachováme tmavé pozadí při scrollu */
   }
   #mainNav .navbar-brand img {
