@@ -11519,6 +11519,6 @@ header.masthead .container {
 /* Zvýšení velikosti loga pouze na mobilech */
 @media (max-width: 991.98px) {
   #mainNav .navbar-brand img {
-    height: 3rem !important; /* větší velikost loga */
+    height: 6rem !important; /* větší velikost loga */
   }
 }
