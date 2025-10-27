@@ -1,36 +1,67 @@
-// scripts.js – čistá verze, bez chyb a bez “magie” na mobilech
-document.addEventListener('DOMContentLoaded', () => {
-  const mainNav = document.querySelector('#mainNav');
-  if (!mainNav) return;
+window.addEventListener('DOMContentLoaded', event => {
+    const navbar = document.querySelector('#mainNav');
+    const logo = navbar?.querySelector('.navbar-brand img');
 
-  // Shrink jen na desktopu (>= 992px). Na mobilech necháme navbar i logo v klidu.
-  const handleShrink = () => {
-    if (window.innerWidth >= 992 && window.scrollY > 0) {
-      mainNav.classList.add('navbar-shrink');
-    } else {
-      mainNav.classList.remove('navbar-shrink');
+    // Původní funkce, která shrinkuje navbar
+    function navbarShrink() {
+        if (!navbar) return;
+
+        // Pokud jsme nahoře
+        if (window.scrollY === 0) {
+            navbar.classList.remove('navbar-shrink');
+        } else {
+            navbar.classList.add('navbar-shrink');
+        }
     }
-  };
 
-  handleShrink();
-  window.addEventListener('scroll', handleShrink);
-  window.addEventListener('resize', handleShrink);
+    // === FIX PRO MOBILY ===
+    if (window.innerWidth <= 991) {
+        // Odpojíme původní chování
+        window.removeEventListener('scroll', navbarShrink);
+        document.removeEventListener('scroll', navbarShrink);
 
-  // ScrollSpy (necháme jak je)
-  if (typeof bootstrap !== 'undefined') {
-    new bootstrap.ScrollSpy(document.body, {
-      target: '#mainNav',
-      rootMargin: '0px 0px -40%',
+        // Nastavíme logo pevně
+        if (logo) {
+            logo.style.height = '70px';
+            logo.style.marginTop = '15px';
+            logo.style.transition = 'none';
+        }
+
+        // Zakážeme přidávání "navbar-shrink" na mobilech
+        const observer = new MutationObserver(() => {
+            if (navbar.classList.contains('navbar-shrink')) {
+                navbar.classList.remove('navbar-shrink');
+            }
+        });
+        observer.observe(navbar, { attributes: true, attributeFilter: ['class'] });
+
+        // Ujistíme se, že se nespustí žádný shrink po načtení
+        navbar.classList.remove('navbar-shrink');
+    } else {
+        // === DESKTOP – původní funkce zůstává ===
+        navbarShrink();
+        document.addEventListener('scroll', navbarShrink);
+    }
+
+    // ScrollSpy a zbytek Bootstrapu
+    const mainNav = document.body.querySelector('#mainNav');
+    if (mainNav) {
+        new bootstrap.ScrollSpy(document.body, {
+            target: '#mainNav',
+            rootMargin: '0px 0px -40%',
+        });
+    }
+
+    // Zavření menu při kliknutí (na mobilech)
+    const navbarToggler = document.body.querySelector('.navbar-toggler');
+    const responsiveNavItems = [].slice.call(
+        document.querySelectorAll('#navbarResponsive .nav-link')
+    );
+    responsiveNavItems.map(function (responsiveNavItem) {
+        responsiveNavItem.addEventListener('click', () => {
+            if (window.getComputedStyle(navbarToggler).display !== 'none') {
+                navbarToggler.click();
+            }
+        });
     });
-  }
-
-  // Zavřít mobilní menu po kliknutí na odkaz
-  const navbarToggler = document.querySelector('.navbar-toggler');
-  document.querySelectorAll('#navbarResponsive .nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-      if (navbarToggler && window.getComputedStyle(navbarToggler).display !== 'none') {
-        navbarToggler.click();
-      }
-    });
-  });
 });
