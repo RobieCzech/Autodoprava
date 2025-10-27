@@ -11521,7 +11521,7 @@ header.masthead .container {
   /* přebijeme jak normální stav, tak .navbar-shrink */
   #mainNav .navbar-brand img,
   #mainNav.navbar-shrink .navbar-brand img {
-    height: 4rem !important;   /* uprav si třeba na 3.6rem / 4rem */
+    height: 1.5rem !important;   /* uprav si třeba na 3.6rem / 4rem */
     width: auto !important;
   }
 }
