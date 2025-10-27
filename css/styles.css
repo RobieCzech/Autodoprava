@@ -11519,7 +11519,7 @@ header.masthead .container {
 /* --- Fix velikosti loga POUZE NA MOBILECH --- */
 @media (max-width: 991.98px) {
   nav#mainNav.navbar.navbar-expand-lg.navbar-dark.fixed-top .navbar-brand img {
-    height: 1.8rem !important;   /* změň podle potřeby (např. 2rem, 2.5rem...) */
+    height: 4rem !important;   /* změň podle potřeby (např. 2rem, 2.5rem...) */
     width: auto !important;
     transition: none !important; /* vypneme animaci zmenšení */
   }
