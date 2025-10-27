@@ -11516,9 +11516,12 @@ header.masthead .container {
   }
 }
 
-/* Zvýšení velikosti loga pouze na mobilech */
+/* VĚTŠÍ LOGO – POUZE MOBIL/TABLET */
 @media (max-width: 991.98px) {
-  #mainNav .navbar-brand img {
-    height: 6rem !important; /* větší velikost loga */
+  /* přebijeme jak normální stav, tak .navbar-shrink */
+  #mainNav .navbar-brand img,
+  #mainNav.navbar-shrink .navbar-brand img {
+    height: 3.2rem !important;   /* uprav si třeba na 3.6rem / 4rem */
+    width: auto !important;
   }
 }
