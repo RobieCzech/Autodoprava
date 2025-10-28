@@ -11394,11 +11394,11 @@ header.masthead .container {
 #services h4.my-3 {
   font-weight: 700;
   margin-top: 15px;
-  color: #111; /* pokud máš tmavé pozadí, jinak může být černá (#000) */
+  color:#000; /* pokud máš tmavé pozadí, jinak může být černá (#000) */
 }
 
 #services p.text-muted {
-  color: #ccc !important; /* zesvětlený text, aby ladil k designu */
+  color:#777778!important; /* zesvětlený text, aby ladil k designu */
 }
 
 /* === CENÍK === */
