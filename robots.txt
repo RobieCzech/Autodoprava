@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://doren.cz/sitemap.xml
